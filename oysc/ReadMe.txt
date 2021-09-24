@@ -1,0 +1,2 @@
+Tomcat和mysql使用最新版本会带来问题
+最好是tomcat使用8， mysql使用5.6
