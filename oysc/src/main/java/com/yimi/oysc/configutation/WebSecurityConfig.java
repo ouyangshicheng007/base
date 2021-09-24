@@ -1,5 +1,8 @@
 package com.yimi.oysc.configutation;
 
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yimi.oysc.exception.ValidateException;
 import org.redisson.Redisson;
@@ -156,6 +159,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         config.useSingleServer().setAddress("redis://127.0.0.1:6379");
 
         return Redisson.create(config);
+    }
+
+
+    /**
+     * 数据库使用Mysql必须要添加这个分页才能生效
+     * @Author: Davy
+     * @Date: 2021/9/24 15:34
+    **/
+    @Bean
+    public MybatisPlusInterceptor innerInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        return interceptor;
     }
 
 }

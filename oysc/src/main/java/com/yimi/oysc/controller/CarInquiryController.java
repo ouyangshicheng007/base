@@ -1,6 +1,7 @@
 package com.yimi.oysc.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yimi.oysc.configutation.UserDetail;
 import com.yimi.oysc.entity.CarInquiryEntity;
 import com.yimi.oysc.service.ICarInquiryService;
@@ -11,9 +12,11 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
@@ -42,6 +45,15 @@ public class CarInquiryController {
     public List<CarInquiryEntity> search() {
 
         return carInquiryService.list();
+    }
+
+    @GetMapping("/page/list")
+    public Page<CarInquiryEntity> pageList(@RequestParam Long current,@RequestParam Long size) {
+        Page<CarInquiryEntity> page = new Page();
+        page.setCurrent(current);
+        page.setSize(size);
+
+        return carInquiryService.page(page);
     }
 
     @GetMapping("/hello")
