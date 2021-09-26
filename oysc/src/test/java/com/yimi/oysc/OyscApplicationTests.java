@@ -46,14 +46,13 @@ class OyscApplicationTests {
 		condVO.setCode("ROLE_ADMIN");
 		condVO.setStatus(StatusEnum.FALSE);
 
-		Page page = new Page();
+		Page<?> page = new Page<>();
 		page.setSize(10);
 		page.setCurrent(1);
 
 		Page<SelectRoleResultVO> pageList = roleMapper.selectRoles(page, condVO);
-
-		System.out.println(page.getTotal());
-		page.getRecords().stream().forEach(System.out::println);
+		System.out.println(pageList.getTotal());
+		pageList.getRecords().forEach(System.out::println);
 
 	}
 
