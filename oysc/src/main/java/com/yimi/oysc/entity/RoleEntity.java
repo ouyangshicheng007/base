@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.yimi.oysc.enumerate.StatusEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -40,7 +42,7 @@ public class RoleEntity implements Serializable {
      * 1:启用，0：禁用
      */
     @TableField("STATUS")
-    private Integer status;
+    private StatusEnum status;
 
     /**
      * 备注

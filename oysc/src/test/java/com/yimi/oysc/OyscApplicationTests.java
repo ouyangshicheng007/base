@@ -1,16 +1,25 @@
 package com.yimi.oysc;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yimi.oysc.entity.CarInquiryEntity;
+import com.yimi.oysc.entity.RoleEntity;
+import com.yimi.oysc.enumerate.StatusEnum;
+import com.yimi.oysc.mapper.RoleMapper;
 import com.yimi.oysc.service.ICarInquiryService;
 import com.yimi.oysc.service.ICarInquirySubItemService;
+import com.yimi.oysc.service.IRoleService;
+import com.yimi.oysc.vo.SelectRoleCondVO;
+import com.yimi.oysc.vo.SelectRoleVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -24,9 +33,22 @@ class OyscApplicationTests {
 	@Autowired
 	private ICarInquirySubItemService carInquirySubItemService;
 
-//	@Autowired
-//	private IRoleService roleService;
+	@Autowired
+	private IRoleService roleService;
 
+
+	@Autowired
+	private RoleMapper roleMapper;
+
+	@Test
+	public void testSelect() {
+		SelectRoleCondVO condVO = new SelectRoleCondVO();
+		condVO.setCode("ROLE_ADMIN");
+		condVO.setStatus(StatusEnum.FALSE);
+
+		List<SelectRoleVO> list = roleMapper.selectList(condVO);
+		list.forEach(System.out::println);
+	}
 
 	@Test
 	public void test() {
@@ -78,15 +100,15 @@ class OyscApplicationTests {
 //		list.forEach(System.out::println);
 //	}
 //
-//	@Test
-//	public void test3() {
-//		QueryWrapper<RoleEntity> wrapper = new QueryWrapper<>();
-//		RoleEntity role = new RoleEntity();
-//		role.setSTATUS(StatusEnum.TRUE);
-//		wrapper.setEntity(role);
-//		List<RoleEntity> list = roleService.list(wrapper);
-//		list.forEach(System.out::println);
-//	}
+	@Test
+	public void test3() {
+		QueryWrapper<RoleEntity> wrapper = new QueryWrapper<>();
+		RoleEntity role = new RoleEntity();
+		role.setStatus(StatusEnum.TRUE);
+		wrapper.setEntity(role);
+		List<RoleEntity> list = roleService.list(wrapper);
+		list.forEach(System.out::println);
+	}
 
 
 
