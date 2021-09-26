@@ -1,6 +1,7 @@
 package com.yimi.oysc.vo.common;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel("分页入参封装对象")
 public class PageWrapper<T> {
 
     @NotNull

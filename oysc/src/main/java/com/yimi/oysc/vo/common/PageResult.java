@@ -1,6 +1,7 @@
 package com.yimi.oysc.vo.common;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel("分页结果封装对象")
 public class PageResult<T> {
 
     @ApiModelProperty("一页展示多少条数据")
