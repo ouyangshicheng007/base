@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Auto-Generated
@@ -30,4 +32,8 @@ public class AddRoleVO {
 
     @ApiModelProperty("角色状态")
     private StatusEnum status = StatusEnum.TRUE;
+
+    private LocalDateTime updateTime;
+
+    private LocalDate testDate;
 }

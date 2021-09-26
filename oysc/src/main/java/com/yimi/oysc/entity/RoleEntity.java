@@ -3,6 +3,8 @@ package com.yimi.oysc.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
@@ -74,5 +76,7 @@ public class RoleEntity implements Serializable {
     @ApiModelProperty("修改人")
     private String updateBy;
 
+    @TableField("TEST_DATE")
+    private LocalDate testDate;
 
 }
