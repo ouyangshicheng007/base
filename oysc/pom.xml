@@ -63,10 +63,18 @@
         </dependency>
 
 
+        <!-- redis -->
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
             <version>3.8.2</version>
+        </dependency>
+
+        <!-- 请求参数校验 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.2.4.Final</version>
         </dependency>
 
         <!-- druid数据源驱动 -->

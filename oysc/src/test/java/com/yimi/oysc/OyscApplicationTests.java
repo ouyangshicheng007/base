@@ -10,7 +10,7 @@ import com.yimi.oysc.mapper.RoleMapper;
 import com.yimi.oysc.service.ICarInquiryService;
 import com.yimi.oysc.service.ICarInquirySubItemService;
 import com.yimi.oysc.service.IRoleService;
-import com.yimi.oysc.vo.select.SelectRoleCondVO;
+import com.yimi.oysc.vo.select.SelectRoleVO;
 import com.yimi.oysc.vo.result.SelectRoleResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -42,7 +42,7 @@ class OyscApplicationTests {
 
 	@Test
 	public void testSelect() {
-		SelectRoleCondVO condVO = new SelectRoleCondVO();
+		SelectRoleVO condVO = new SelectRoleVO();
 		condVO.setCode("ROLE_ADMIN");
 		condVO.setStatus(StatusEnum.FALSE);
 
