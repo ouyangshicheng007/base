@@ -2,31 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yimi.oysc.mapper.RoleMapper">
 
-    <resultMap id="selectListMap" type="com.yimi.oysc.vo.SelectRoleVO">
+    <resultMap id="selectListMap" type="com.yimi.oysc.vo.result.SelectRoleResultVO">
         <result property="name" column="name" />
         <result property="code" column="code" />
         <result property="status" column="status" />
         <result property="createBy" column="create_By" />
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time"/>
     </resultMap>
 
 
-    <select id="selectList" resultMap="selectListMap">
-        select name,
-               code,
-               status,
-               create_Time,
-               create_By
-        from t_role
+    <select id="selectRoles" resultMap="selectListMap">
+        select
+                t.name,
+                t.code,
+                t.status,
+                t.create_Time,
+                t.create_By
+        from t_role t
         <where>
             <if test="condVO.name != null">
-                and name = #{convVO.name}
+                and t.name = #{convVO.name}
             </if>
             <if test="condVO.code != null">
-                and code = #{condVO.code}
+                and t.code = #{condVO.code}
             </if>
             <if test="condVO.status != null">
-                and status = #{condVO.status}
+                and t.status = #{condVO.status}
             </if>
         </where>
     </select>

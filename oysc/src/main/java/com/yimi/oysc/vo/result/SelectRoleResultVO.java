@@ -1,4 +1,4 @@
-package com.yimi.oysc.vo;
+package com.yimi.oysc.vo.result;
 
 import com.yimi.oysc.enumerate.StatusEnum;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @Date 2021/9/26 13:45
  **/
 @Data
-public class SelectRoleVO {
+public class SelectRoleResultVO {
 
     private String name;
 

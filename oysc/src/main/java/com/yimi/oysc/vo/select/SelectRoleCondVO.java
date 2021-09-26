@@ -1,4 +1,4 @@
-package com.yimi.oysc.vo;
+package com.yimi.oysc.vo.select;
 
 import com.yimi.oysc.enumerate.StatusEnum;
 import lombok.Data;

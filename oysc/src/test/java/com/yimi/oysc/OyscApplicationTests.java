@@ -10,8 +10,8 @@ import com.yimi.oysc.mapper.RoleMapper;
 import com.yimi.oysc.service.ICarInquiryService;
 import com.yimi.oysc.service.ICarInquirySubItemService;
 import com.yimi.oysc.service.IRoleService;
-import com.yimi.oysc.vo.SelectRoleCondVO;
-import com.yimi.oysc.vo.SelectRoleVO;
+import com.yimi.oysc.vo.select.SelectRoleCondVO;
+import com.yimi.oysc.vo.result.SelectRoleResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -46,8 +46,15 @@ class OyscApplicationTests {
 		condVO.setCode("ROLE_ADMIN");
 		condVO.setStatus(StatusEnum.FALSE);
 
-		List<SelectRoleVO> list = roleMapper.selectList(condVO);
-		list.forEach(System.out::println);
+		Page page = new Page();
+		page.setSize(10);
+		page.setCurrent(1);
+
+		Page<SelectRoleResultVO> pageList = roleMapper.selectRoles(page, condVO);
+
+		System.out.println(page.getTotal());
+		page.getRecords().stream().forEach(System.out::println);
+
 	}
 
 	@Test
