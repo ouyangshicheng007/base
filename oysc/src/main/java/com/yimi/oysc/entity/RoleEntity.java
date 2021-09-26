@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
-
-import com.yimi.oysc.enumerate.StatusEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,7 +15,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author Davy
- * @since 2021-09-24
+ * @since 2021-09-26
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -26,34 +24,41 @@ public class RoleEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 主键ID
+     */
     @TableId(value = "ID", type = IdType.AUTO)
-    private Integer ID;
+    private Integer id;
 
     @TableField("NAME")
-    private String NAME;
+    private String name;
+
+    @TableField("CODE")
+    private String code;
 
     /**
      * 1:启用，0：禁用
      */
     @TableField("STATUS")
-    private StatusEnum STATUS;
+    private Integer status;
 
     /**
      * 备注
      */
     @TableField("REMARK")
-    private String REMARK;
+    private String remark;
 
     @TableField("CREATE_TIME")
-    private LocalDateTime CREATE_TIME;
+    private LocalDateTime createTime;
 
     @TableField("CREATE_BY")
-    private String CREATE_BY;
+    private String createBy;
 
     @TableField("UPDATE_TIME")
-    private LocalDateTime UPDATE_TIME;
+    private LocalDateTime updateTime;
 
     @TableField("UPDATE_BY")
-    private String UPDATE_BY;
+    private String updateBy;
+
 
 }

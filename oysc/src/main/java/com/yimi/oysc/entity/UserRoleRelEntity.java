@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author Davy
- * @since 2021-09-24
+ * @since 2021-09-26
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -28,19 +28,19 @@ public class UserRoleRelEntity implements Serializable {
      * 主键ID
      */
     @TableId(value = "ID", type = IdType.AUTO)
-    private Integer ID;
+    private Integer id;
 
     @TableField("USER_ID")
-    private Integer USER_ID;
+    private Integer userId;
 
     @TableField("ROLE_ID")
-    private Integer ROLE_ID;
+    private Integer roleId;
 
     @TableField("CREATE_TIME")
-    private LocalDateTime CREATE_TIME;
+    private LocalDateTime createTime;
 
     @TableField("CREATE_BY")
-    private String CREATE_BY;
+    private String createBy;
 
 
 }

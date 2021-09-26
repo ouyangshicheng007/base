@@ -2,7 +2,8 @@ DROP TABLE IF EXISTS T_ROLE;
 CREATE TABLE T_ROLE
 (
     ID          int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-    NAME        varchar(50) NOT NULL,
+    NAME        varchar(50) NOT NULL COMMENT '角色名称',
+    CODE        varchar(50) NOT NULL COMMENT '角色编码',
     STATUS      int(1) NOT NULL DEFAULT 1 COMMENT '1:启用，0：禁用',
     REMARK        varchar(255)                  COMMENT '备注',
     CREATE_TIME datetime  NOT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -17,8 +18,8 @@ DROP TABLE IF EXISTS T_USER;
 CREATE TABLE T_USER
 (
     ID          int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-    USERNAME        varchar(50) NOT NULL,
-    PASSWORD        varchar(200) NOT NULL,
+    USERNAME        varchar(50) NOT NULL COMMENT '用户名',
+    PASSWORD        varchar(200) NOT NULL COMMENT '密码',
     STATUS      int(1) NOT NULL DEFAULT 1 COMMENT '1:启用，0：禁用',
     SEX           INT(1) NOT NULL DEFAULT 1 COMMENT '1:男性，0：女性',
     CREATE_TIME datetime  NOT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -33,7 +34,7 @@ DROP TABLE IF EXISTS T_PERMISSION;
 CREATE TABLE T_PERMISSION
 (
     ID          int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-    NAME        varchar(50) NOT NULL            COMMENT '名称',
+    NAME        varchar(50) NOT NULL            COMMENT '权限名称',
     TYPE        VARCHAR(20) NOT NULL            COMMENT 'URL:接口地址，MENU：菜单，BUTTON：按钮，FIELD：字段',
     URL           varchar(255) NOT NULL         COMMENT '资源地址',
     STATUS      int(1) NOT NULL DEFAULT 1       COMMENT '1:启用，0：禁用',

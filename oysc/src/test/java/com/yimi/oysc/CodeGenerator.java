@@ -128,7 +128,11 @@ public class CodeGenerator {
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
-        strategy.setColumnNaming(NamingStrategy.no_change);
+//        strategy.setColumnNaming(NamingStrategy.no_change);
+//        表名和表字段全部使用下划线转驼峰命名
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+
+
 //        strategy.setSuperEntityClass("你自己的父类实体,没有就不用设置!");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
