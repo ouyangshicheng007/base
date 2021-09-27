@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yimi.oysc.entity.CarInquiryEntity;
+import com.yimi.oysc.entity.OperationLogEntity;
 import com.yimi.oysc.entity.RoleEntity;
+import com.yimi.oysc.enumerate.OperationLogTypeEnum;
 import com.yimi.oysc.enumerate.StatusEnum;
+import com.yimi.oysc.mapper.OperationLogMapper;
 import com.yimi.oysc.mapper.RoleMapper;
 import com.yimi.oysc.service.ICarInquiryService;
 import com.yimi.oysc.service.ICarInquirySubItemService;
@@ -19,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootTest
@@ -39,6 +43,27 @@ class OyscApplicationTests {
 
 	@Autowired
 	private RoleMapper roleMapper;
+
+	@Autowired
+	private OperationLogMapper operationLogMapper;
+
+
+
+	@Test
+	public void testOperationLog() {
+//		OperationLogEntity entity = new OperationLogEntity();
+//		entity.setName("新增角色");
+//		entity.setType(OperationLogTypeEnum.ADD);
+//		entity.setRequestJson("{\"name\":\"request\"}");
+//		entity.setResponseJson("{\"name\":\"response\"}");
+//		entity.setRequestIp("127.0.0.1");
+//		entity.setCreateTime(LocalDateTime.now());
+//		entity.setCreateBy("sa");
+//		operationLogMapper.insert(entity);
+
+		List<OperationLogEntity> list = operationLogMapper.selectList(new QueryWrapper<>());
+		list.forEach(System.out::println);
+	}
 
 	@Test
 	public void testSelect() {

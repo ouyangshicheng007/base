@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 public class UpdateRoleVO {
 
     @NotNull(message = "修改ID不能为空")
+    @ApiModelProperty("ID")
     private Integer id;
 
     @ApiModelProperty("角色名称")

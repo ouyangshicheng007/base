@@ -7,8 +7,7 @@ import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 
-import com.yimi.oysc.enumerate.SexEnum;
-import com.yimi.oysc.enumerate.StatusEnum;
+import com.yimi.oysc.enumerate.OperationLogTypeEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -22,8 +21,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("t_user")
-public class UserEntity implements Serializable {
+@TableName("t_operation_log")
+public class OperationLogEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,35 +32,26 @@ public class UserEntity implements Serializable {
     @TableId(value = "ID", type = IdType.AUTO)
     private Integer id;
 
-    @TableField("USERNAME")
-    private String username;
+    @TableField("NAME")
+    private String name;
 
-    @TableField("PASSWORD")
-    private String password;
+    @TableField("TYPE")
+    private OperationLogTypeEnum type;
 
-    /**
-     * 1:启用，0：禁用
-     */
-    @TableField("STATUS")
-    private StatusEnum status;
+    @TableField("REQUEST_IP")
+    private String requestIp;
 
-    /**
-     * 1:男性，0：女性
-     */
-    @TableField("SEX")
-    private SexEnum sex;
+    @TableField("REQUEST_JSON")
+    private String requestJson;
+
+    @TableField("RESPONSE_JSON")
+    private String responseJson;
 
     @TableField("CREATE_TIME")
     private LocalDateTime createTime;
 
     @TableField("CREATE_BY")
     private String createBy;
-
-    @TableField("UPDATE_TIME")
-    private LocalDateTime updateTime;
-
-    @TableField("UPDATE_BY")
-    private String updateBy;
 
 
 }

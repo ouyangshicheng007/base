@@ -5,15 +5,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yimi.oysc.entity.RoleEntity;
 import com.yimi.oysc.service.IRoleService;
-import com.yimi.oysc.utils.ClassCopyUtils;
+import com.yimi.oysc.utils.CommonUtils;
 import com.yimi.oysc.vo.add.AddRoleVO;
 import com.yimi.oysc.vo.common.PageResult;
 import com.yimi.oysc.vo.common.PageWrapper;
 import com.yimi.oysc.vo.common.ResultVO;
 import com.yimi.oysc.vo.select.SelectRoleVO;
+import com.yimi.oysc.vo.update.UpdateRoleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -38,11 +40,8 @@ public class RoleController {
     @PostMapping("/add")
     @ApiOperation("新增角色")
     public ResultVO<RoleEntity> add(@Valid @RequestBody AddRoleVO vo) {
-        RoleEntity role = ClassCopyUtils.classCopy(vo, RoleEntity.class);
 
-        role.setCreateTime(LocalDateTime.now());
-        role.setCreateBy("admin");
-        roleService.save(role);
+        RoleEntity role = roleService.add(vo, CommonUtils.getLoginUsername());
 
         return ResultVO.successResult(role);
     }
@@ -60,12 +59,8 @@ public class RoleController {
 
     @PutMapping("/update")
     @ApiOperation("修改角色")
-    public ResultVO<RoleEntity> update(@Valid @RequestBody AddRoleVO vo) {
-        RoleEntity role = ClassCopyUtils.classCopy(vo, RoleEntity.class);
-
-        role.setCreateTime(LocalDateTime.now());
-        role.setCreateBy("admin");
-        roleService.save(role);
+    public ResultVO<RoleEntity> update(@Valid @RequestBody UpdateRoleVO vo) {
+        RoleEntity role = roleService.update(vo, CommonUtils.getLoginUsername());
 
         return ResultVO.successResult(role);
     }
@@ -74,7 +69,7 @@ public class RoleController {
     @ApiOperation("分页查询角色")
     public ResultVO<PageResult<RoleEntity>> list(@Valid PageWrapper<RoleEntity> pageWrapper, SelectRoleVO selectRoleVO) {
         QueryWrapper<RoleEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.setEntity(ClassCopyUtils.classCopy(selectRoleVO, RoleEntity.class));
+        queryWrapper.setEntity(CommonUtils.classCopy(selectRoleVO, RoleEntity.class));
         Page<RoleEntity> page = roleService.page(pageWrapper.toDbPage(), queryWrapper);
         return PageResult.toVoPage(page);
     }

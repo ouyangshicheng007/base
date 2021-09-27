@@ -142,7 +142,7 @@ public class CodeGenerator {
 //        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
-        strategy.setInclude("t_user","t_role","t_user_role_rel","t_permission","t_role_permission_rel");
+        strategy.setInclude("T_OPERATION_LOG","t_role","t_user_role_rel","t_permission","t_role_permission_rel");
 //        strategy.setTablePrefix(pc.getModuleName() + "_");
         // 去掉表名的T_前缀
         strategy.setTablePrefix("T_");
