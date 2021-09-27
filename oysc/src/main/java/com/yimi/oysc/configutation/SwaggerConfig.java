@@ -11,6 +11,8 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -33,7 +35,11 @@ public class SwaggerConfig {
                 .select()//扫描方法
                 .apis(RequestHandlerSelectors.basePackage("com.yimi.oysc.controller"))//扫描包路径
                 .paths(PathSelectors.any())//路径过滤
-                .build();//构建
+                .build()
+                // 为了方便LocalDateTime和LocalDate日期类型，在swagger中正确的显示YYYY-MM-DD HH:mm:ss
+                .directModelSubstitute(LocalDateTime.class, String.class)
+                .directModelSubstitute(LocalDate.class, String.class)
+                ;//构建
     }
 
     // 配置文档信息

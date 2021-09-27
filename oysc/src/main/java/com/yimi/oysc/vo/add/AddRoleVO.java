@@ -33,7 +33,9 @@ public class AddRoleVO {
     @ApiModelProperty("角色状态")
     private StatusEnum status = StatusEnum.TRUE;
 
+    @ApiModelProperty(value = "修改日期", example = "2021-01-01 12:00:00")
     private LocalDateTime updateTime;
 
+    @ApiModelProperty(value = "测试日期", example = "2021-01-01")
     private LocalDate testDate;
 }

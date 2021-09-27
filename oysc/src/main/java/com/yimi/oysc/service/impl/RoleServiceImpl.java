@@ -70,7 +70,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
         RoleEntity role = super.getOne(queryWrapper);
 
         if (role != null) {
-            throw new RoleNameExistException(String.format("角色名称[%s]已存在", name));
+            throw new RoleNameExistException(1, String.format("角色名称[%s]已存在", name));
         }
     }
 }

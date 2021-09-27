@@ -1,7 +1,5 @@
 package com.yimi.oysc.exception;
 
-import org.springframework.security.core.AuthenticationException;
-
 /**
  * Auto-Generated
  *
@@ -10,7 +8,7 @@ import org.springframework.security.core.AuthenticationException;
  **/
 public class RoleNameExistException extends UserDefineException {
 
-    public RoleNameExistException(String msg) {
-        super(msg);
+    public RoleNameExistException(Integer errCode, String msg) {
+        super(errCode, msg);
     }
 }
