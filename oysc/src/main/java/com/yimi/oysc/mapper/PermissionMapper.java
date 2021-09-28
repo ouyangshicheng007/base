@@ -2,6 +2,9 @@ package com.yimi.oysc.mapper;
 
 import com.yimi.oysc.entity.PermissionEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface PermissionMapper extends BaseMapper<PermissionEntity> {
 
+
+    List<PermissionEntity> listByRoleId(@Param("roleId")Integer roleId);
 }

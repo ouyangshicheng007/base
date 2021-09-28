@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.yimi.oysc.enumerate.PermissionTypeEnum;
+import com.yimi.oysc.enumerate.StatusEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -40,7 +43,7 @@ public class PermissionEntity implements Serializable {
      * URL:接口地址，MENU：菜单，BUTTON：按钮，FIELD：字段
      */
     @TableField("TYPE")
-    private String type;
+    private PermissionTypeEnum type;
 
     /**
      * 资源地址
@@ -52,7 +55,14 @@ public class PermissionEntity implements Serializable {
      * 1:启用，0：禁用
      */
     @TableField("STATUS")
-    private Integer status;
+    private StatusEnum status;
+
+    /**
+     * 父ID，为空表示为最顶层节点
+     * @Date: 2021/9/27 15:19
+    **/
+    @TableField("PARENT_ID")
+    private Integer parentId;
 
     /**
      * 备注

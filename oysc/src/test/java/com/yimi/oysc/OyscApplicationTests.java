@@ -6,24 +6,35 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yimi.oysc.entity.CarInquiryEntity;
 import com.yimi.oysc.entity.OperationLogEntity;
 import com.yimi.oysc.entity.RoleEntity;
-import com.yimi.oysc.enumerate.OperationLogTypeEnum;
+import com.yimi.oysc.enumerate.PermissionTypeEnum;
 import com.yimi.oysc.enumerate.StatusEnum;
 import com.yimi.oysc.mapper.OperationLogMapper;
 import com.yimi.oysc.mapper.RoleMapper;
 import com.yimi.oysc.service.ICarInquiryService;
-import com.yimi.oysc.service.ICarInquirySubItemService;
 import com.yimi.oysc.service.IRoleService;
 import com.yimi.oysc.vo.select.SelectRoleVO;
 import com.yimi.oysc.vo.result.SelectRoleResultVO;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import java.time.LocalDateTime;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -35,9 +46,6 @@ class OyscApplicationTests {
 	private ICarInquiryService carInquiryService;
 
 	@Autowired
-	private ICarInquirySubItemService carInquirySubItemService;
-
-	@Autowired
 	private IRoleService roleService;
 
 
@@ -47,7 +55,50 @@ class OyscApplicationTests {
 	@Autowired
 	private OperationLogMapper operationLogMapper;
 
+	@Autowired
+	private WebApplicationContext applicationContext;
 
+	@Test
+	public void testGetAllURL() {
+		RequestMappingHandlerMapping mapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
+		// 拿到Handler适配器中的全部方法
+		Map<RequestMappingInfo, HandlerMethod> methodMap = mapping.getHandlerMethods();
+//		for (RequestMappingInfo info : methodMap.keySet()){
+//
+//			Set<String> urlSet = info.getPatternsCondition().getPatterns();
+//			// 获取全部请求方式
+//			Set<RequestMethod> Methods = info.getMethodsCondition().getMethods();
+//			System.out.println(Methods.toString());
+//			for (String url : urlSet){
+//				// 加上自己的域名和端口号，就可以直接调用
+////				urlList.add("http://localhost:XXXX"+url);
+//				System.out.println(url);
+//			}
+//		}
+
+		methodMap.values().forEach(handlerMethod -> {
+			Method method = handlerMethod.getMethod();
+			Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
+			ApiOperation apiOperation = method.getDeclaredAnnotation(ApiOperation.class);
+			if (apiOperation != null) {
+
+
+
+				System.out.println(apiOperation.value());
+			}
+
+		});
+
+	}
+
+	private PermissionTypeEnum getPermissionType(Method method) {
+		GetMapping get = method.getDeclaredAnnotation(GetMapping.class);
+		if (get != null) {
+		}
+
+
+		return null;
+	}
 
 	@Test
 	public void testOperationLog() {

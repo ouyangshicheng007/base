@@ -49,7 +49,7 @@ public class CarInquiryController {
 
     @GetMapping("/page/list")
     public Page<CarInquiryEntity> pageList(@RequestParam Long current,@RequestParam Long size) {
-        Page<CarInquiryEntity> page = new Page();
+        Page<CarInquiryEntity> page = new Page<>();
         page.setCurrent(current);
         page.setSize(size);
 

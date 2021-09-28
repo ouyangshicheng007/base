@@ -11,15 +11,14 @@ import com.yimi.oysc.vo.common.PageResult;
 import com.yimi.oysc.vo.common.PageWrapper;
 import com.yimi.oysc.vo.common.ResultVO;
 import com.yimi.oysc.vo.select.SelectRoleVO;
+import com.yimi.oysc.vo.update.AssignRoleVO;
 import com.yimi.oysc.vo.update.UpdateRoleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -74,4 +73,10 @@ public class RoleController {
         return PageResult.toVoPage(page);
     }
 
+    @PutMapping("/assign")
+    @ApiOperation("给角色分配权限")
+    public ResultVO<Boolean> assign(@Valid @RequestBody AssignRoleVO vo) {
+
+        return ResultVO.successResult(roleService.assign(vo, CommonUtils.getLoginUsername()));
+    }
 }

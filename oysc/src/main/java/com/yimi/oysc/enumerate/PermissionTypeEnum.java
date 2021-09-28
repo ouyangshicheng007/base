@@ -1,5 +1,7 @@
 package com.yimi.oysc.enumerate;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
+
 /**
  * Auto-Generated
  *
@@ -8,12 +10,20 @@ package com.yimi.oysc.enumerate;
  **/
 public enum PermissionTypeEnum {
 
-    URL,
+    URL("URL"),
 
-    MENU,
+    MENU("MENU"),
 
-    BUTTON,
+    BUTTON("BUTTON"),
 
-    FIELD,
+    FIELD("FIELD"),
 
+;
+
+    @EnumValue
+    String value;
+
+    PermissionTypeEnum(String value) {
+        this.value = value;
+    }
 }

@@ -38,6 +38,7 @@ CREATE TABLE T_PERMISSION
     TYPE        VARCHAR(20) NOT NULL            COMMENT 'URL:接口地址，MENU：菜单，BUTTON：按钮，FIELD：字段',
     URL           varchar(255) NOT NULL         COMMENT '资源地址',
     STATUS      int(1) NOT NULL DEFAULT 1       COMMENT '1:启用，0：禁用',
+    PARENT_ID          int(11)                  COMMENT '父ID，为空表示最顶层节点',
     REMARK        varchar(255)                  COMMENT '备注',
     CREATE_TIME datetime  NOT NULL ON UPDATE CURRENT_TIMESTAMP,
     CREATE_BY   varchar(50) NOT NULL,
