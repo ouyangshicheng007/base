@@ -1,6 +1,6 @@
 package com.yimi.oysc.utils;
 
-import com.yimi.oysc.configutation.UserDetail;
+import com.yimi.oysc.security.LoginUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,8 +29,8 @@ public class CommonUtils {
     }
 
 
-    public static UserDetail getLoginUserDetail() {
-        return (UserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public static LoginUser getLoginUserDetail() {
+        return (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
     public static String getLoginUsername() {

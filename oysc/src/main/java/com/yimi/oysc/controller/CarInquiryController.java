@@ -2,17 +2,15 @@ package com.yimi.oysc.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yimi.oysc.configutation.UserDetail;
+import com.yimi.oysc.security.LoginUser;
 import com.yimi.oysc.entity.CarInquiryEntity;
 import com.yimi.oysc.service.ICarInquiryService;
-import org.redisson.RedissonLock;
 import org.redisson.api.RBucket;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -59,7 +57,7 @@ public class CarInquiryController {
     @GetMapping("/hello")
     public String sayHi() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetail user = (UserDetail) authentication.getPrincipal();
+        LoginUser user = (LoginUser) authentication.getPrincipal();
         System.out.println(user);
         System.out.println(user);
 
@@ -68,9 +66,9 @@ public class CarInquiryController {
     }
 
     @GetMapping("/foo")
-    public UserDetail foo(Principal principal) {
+    public LoginUser foo(Principal principal) {
         Authentication authentication = (Authentication) principal;
-        UserDetail user = (UserDetail) authentication.getPrincipal();
+        LoginUser user = (LoginUser) authentication.getPrincipal();
 
         return user;
     }

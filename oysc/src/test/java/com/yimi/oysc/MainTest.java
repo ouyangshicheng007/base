@@ -1,5 +1,7 @@
 package com.yimi.oysc;
 
+import java.util.regex.Pattern;
+
 /**
  * Auto-Generated
  *
@@ -10,7 +12,11 @@ public class MainTest {
 
     public static void main(String[] args) {
 
-        System.out.println(Integer.MAX_VALUE);
+        String str = "/permission/list/1";
+
+        Pattern pattern = Pattern.compile("/permission/list/\\d+");
+
+        System.out.println(pattern.matcher(str).matches());
 
     }
 }

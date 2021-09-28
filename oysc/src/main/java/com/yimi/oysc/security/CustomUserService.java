@@ -1,6 +1,7 @@
-package com.yimi.oysc.configutation;
+package com.yimi.oysc.security;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.yimi.oysc.entity.PermissionEntity;
 import com.yimi.oysc.entity.RoleEntity;
 import com.yimi.oysc.entity.UserEntity;
 import com.yimi.oysc.service.IPermissionService;
@@ -8,6 +9,7 @@ import com.yimi.oysc.service.IRoleService;
 import com.yimi.oysc.service.IUserRoleRelService;
 import com.yimi.oysc.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -51,12 +53,19 @@ public class CustomUserService implements UserDetailsService {
             throw new UsernameNotFoundException("用户名不存在");
         }
 
-        UserDetail user = new UserDetail(userEntity.getUsername(), userEntity.getPassword(), new ArrayList<>());
 
-
+        LoginUser loginUser = new LoginUser();
+        loginUser.setUsername(userEntity.getUsername());
+        loginUser.setPassword(userEntity.getPassword());
+        loginUser.setStatus(userEntity.getStatus());
         // 查询用户有哪些角色
         List<RoleEntity> roles = roleService.findRolesByUserId(userEntity.getId());
-        user.setRoles(roles);
-        return user;
+        loginUser.setRoles(roles);
+
+        List<PermissionEntity> permissions = permissionService.listByUserId(userEntity.getId());
+        List<GrantedAuthority> list = permissions.stream().map(data -> (GrantedAuthority) data::getUrl).collect(Collectors.toList());
+        loginUser.setAuthorities(list);
+
+        return loginUser;
     }
 }
