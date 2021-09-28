@@ -99,6 +99,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleEntity> impleme
         return true;
     }
 
+    @Override
+    public List<RoleEntity> findRolesByUserId(Integer userId) {
+        return super.baseMapper.findRolesByUserId(userId);
+    }
+
     private void existName(String name) {
         RoleEntity roleEntity = new RoleEntity();
         roleEntity.setName(name);

@@ -14,4 +14,18 @@
             R.ID = #{roleId}
         </where>
     </select>
+
+    <select id="listByUserId" resultType="com.yimi.oysc.entity.PermissionEntity">
+        SELECT
+            DISTINCT
+            p.*
+        FROM
+            t_role r
+                LEFT JOIN t_user_role_rel ur ON ur.role_id = r.id
+                LEFT JOIN t_user u ON u.id = ur.user_id
+                LEFT JOIN t_role_permission_rel rp on rp.ROLE_ID = r.ID
+                LEFT JOIN t_permission p on p.ID = rp.PERMISSION_ID
+        WHERE
+            u.id = #{userId}
+    </select>
 </mapper>

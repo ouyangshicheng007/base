@@ -18,4 +18,6 @@ public interface PermissionMapper extends BaseMapper<PermissionEntity> {
 
 
     List<PermissionEntity> listByRoleId(@Param("roleId")Integer roleId);
+
+    List<PermissionEntity> listByUserId(@Param("userId") Integer userId);
 }

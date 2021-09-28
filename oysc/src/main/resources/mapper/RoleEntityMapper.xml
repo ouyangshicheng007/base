@@ -31,4 +31,17 @@
             </if>
         </where>
     </select>
+    <select id="findRolesByUserId" resultType="com.yimi.oysc.entity.RoleEntity">
+        select
+                *
+        from t_role r
+            left join t_user_role_rel ur
+                on ur.role_id = r.id
+            left join t_user u
+                on u.id = ur.user_id
+        <where>
+            u.id = #{userId}
+        </where>
+
+    </select>
 </mapper>

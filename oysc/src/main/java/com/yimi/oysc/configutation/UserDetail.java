@@ -1,7 +1,6 @@
 package com.yimi.oysc.configutation;
 
-import com.yimi.oysc.vo.RoleVO;
-import lombok.Data;
+import com.yimi.oysc.entity.RoleEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -16,17 +15,19 @@ import java.util.List;
  **/
 public class UserDetail extends User {
 
-    private List<RoleVO> roles;
+    private List<RoleEntity> roles;
+
+    private List<String> authorities;
 
     public UserDetail(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
 
-    public List<RoleVO> getRoles() {
+    public List<RoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleVO> roles) {
+    public void setRoles(List<RoleEntity> roles) {
         this.roles = roles;
     }
 }

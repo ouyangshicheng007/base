@@ -8,6 +8,8 @@ import com.yimi.oysc.vo.select.SelectRoleVO;
 import com.yimi.oysc.vo.result.SelectRoleResultVO;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -29,4 +31,7 @@ public interface RoleMapper extends BaseMapper<RoleEntity> {
 
 //    查询全部
 //    List<SelectRoleResultVO> selectRoles(@Param("condVO") SelectRoleCondVO condVO);
+
+
+    List<RoleEntity> findRolesByUserId(@Param("userId") Integer userId);
 }

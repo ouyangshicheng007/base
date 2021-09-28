@@ -21,5 +21,7 @@ public interface IPermissionService extends IService<PermissionEntity> {
 
     List<PermissionEntity> listByRoleId(Integer roleId);
 
+    List<PermissionEntity> listByUserId(Integer userId);
+
     Boolean deletePermission(Integer permissionId);
 }

@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -57,6 +58,17 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         } else {
             return super.baseMapper.listByRoleId(roleId);
         }
+    }
+
+    @Override
+    public List<PermissionEntity> listByUserId(Integer userId) {
+        List<RoleEntity> roles = roleService.findRolesByUserId(userId);
+        Optional<RoleEntity> superAdmin = roles.stream().filter(data -> data.getCode().equals("ROLE_SUPER_ADMIN")).findAny();
+        if (superAdmin.isPresent()) {
+            return super.baseMapper.selectList(new QueryWrapper<>());
+        }
+
+        return super.baseMapper.listByUserId(userId);
     }
 
     @Override
