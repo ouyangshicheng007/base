@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.FilterInvocation;
 
 import java.util.Collection;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -45,34 +46,20 @@ public class UrlRoleAuthHandler implements AccessDecisionVoter<Object> {
             return ACCESS_DENIED;
         }
 
-
+        int result = ACCESS_ABSTAIN;
         if (object instanceof FilterInvocation) {
             FilterInvocation invocation = (FilterInvocation) object;
-            System.out.println(invocation.getRequest().getRequestURI());
-            System.out.println(JSON.toJSONString(invocation.getRequest().getParameterMap()));
-
-            int result = ACCESS_ABSTAIN;
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-//
-//        for (ConfigAttribute urlRole : urlRoles) {
-//            if (this.supports(urlRole)) {
-            // 此处默认值为弃权， 表示只要有一个角色对应上，用户就可以访问链接
-            // 如果值改为拒绝，表示必须全部角色包含才能访问
+
             result = ACCESS_ABSTAIN;
 
-
-
-
             for (GrantedAuthority userRole : authorities) {
-                if (urlRole.getAttribute().equals(userRole.getAuthority())) {
+                Pattern pattern = Pattern.compile(userRole.getAuthority());
+                if (pattern.matcher(invocation.getHttpRequest().getRequestURI()).matches()) {
                     return ACCESS_GRANTED;
                 }
             }
-//            }
-//        }
         }
-
-
 
         return result;
     }

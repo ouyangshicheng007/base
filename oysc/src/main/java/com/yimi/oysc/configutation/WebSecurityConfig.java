@@ -135,9 +135,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 授权配置
         http.authenticationProvider(authenticationProvider())
                 .authorizeRequests()
-                // 所有静态文件可以范文
-                .antMatchers("/js/**", "/css/**", "/images/**").permitAll()
-                .antMatchers("/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**").permitAll()
                 // 动态url权限
                 .withObjectPostProcessor(new DefinedObjectPostProcessor())
                 // url决策、投票器
@@ -148,6 +145,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        // 忽略的静态地址链接在此配置，才可以经过URL动态权限校验
         web.ignoring().antMatchers("/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
     }
 
