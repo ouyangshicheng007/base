@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimi.oysc.mapper.PermissionMapper">
+
+    <select id="listByRoleId" resultType="com.yimi.oysc.entity.PermissionEntity">
+        SELECT
+               *
+        FROM T_PERMISSION P
+            LEFT JOIN T_ROLE_PERMISSION_REL RP
+                    ON P.ID = RP.PERMISSION_ID
+            LEFT JOIN T_ROLE R
+                    ON R.ID = RP.ROLE_ID
+        <where>
+            R.ID = #{roleId}
+        </where>
+    </select>
+
+    <select id="listByUserId" resultType="com.yimi.oysc.entity.PermissionEntity">
+        SELECT
+            DISTINCT
+            p.*
+        FROM
+            t_role r
+                LEFT JOIN t_user_role_rel ur ON ur.role_id = r.id
+                LEFT JOIN t_user u ON u.id = ur.user_id
+                LEFT JOIN t_role_permission_rel rp on rp.ROLE_ID = r.ID
+                LEFT JOIN t_permission p on p.ID = rp.PERMISSION_ID
+        WHERE
+            u.id = #{userId}
+    </select>
+</mapper>

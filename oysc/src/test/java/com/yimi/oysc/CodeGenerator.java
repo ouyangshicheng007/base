@@ -50,18 +50,19 @@ public class CodeGenerator {
         gc.setOpen(false);
         // gc.setSwagger2(true); 实体属性 Swagger2 注解
 
-        gc.setDateType(DateType.ONLY_DATE);
+//        gc.setDateType(DateType.ONLY_DATE);
+        gc.setDateType(DateType.TIME_PACK);
         gc.setEntityName("%sEntity");
 
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://huatai.rwlb.rds.aliyuncs.com:3306/qunar?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/test?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("otainsure");
-        dsc.setPassword("Huatai1234!@#$");
+        dsc.setUsername("root");
+        dsc.setPassword("123456");
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -127,7 +128,11 @@ public class CodeGenerator {
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
-        strategy.setColumnNaming(NamingStrategy.no_change);
+//        strategy.setColumnNaming(NamingStrategy.no_change);
+//        表名和表字段全部使用下划线转驼峰命名
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+
+
 //        strategy.setSuperEntityClass("你自己的父类实体,没有就不用设置!");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
@@ -137,8 +142,10 @@ public class CodeGenerator {
 //        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
-        strategy.setInclude("car_inquiry","car_inquiry_sub_item");
-        strategy.setTablePrefix(pc.getModuleName() + "_");
+        strategy.setInclude("T_OPERATION_LOG","t_role","t_user_role_rel","t_permission","t_role_permission_rel");
+//        strategy.setTablePrefix(pc.getModuleName() + "_");
+        // 去掉表名的T_前缀
+        strategy.setTablePrefix("T_");
 
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());

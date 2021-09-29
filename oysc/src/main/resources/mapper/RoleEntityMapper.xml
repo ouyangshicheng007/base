@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yimi.oysc.mapper.RoleMapper">
+
+    <resultMap id="selectListMap" type="com.yimi.oysc.vo.result.SelectRoleResultVO">
+        <result property="name" column="name" />
+        <result property="code" column="code" />
+        <result property="status" column="status" />
+        <result property="createBy" column="create_By" />
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+    <select id="selectRoles" resultMap="selectListMap">
+        select
+                t.name,
+                t.code,
+                t.status,
+                t.create_Time,
+                t.create_By
+        from t_role t
+        <where>
+            <if test="condVO.name != null">
+                and t.name = #{convVO.name}
+            </if>
+            <if test="condVO.code != null">
+                and t.code = #{condVO.code}
+            </if>
+            <if test="condVO.status != null">
+                and t.status = #{condVO.status}
+            </if>
+        </where>
+    </select>
+    <select id="findRolesByUserId" resultType="com.yimi.oysc.entity.RoleEntity">
+        select
+                *
+        from t_role r
+            left join t_user_role_rel ur
+                on ur.role_id = r.id
+            left join t_user u
+                on u.id = ur.user_id
+        <where>
+            u.id = #{userId}
+        </where>
+
+    </select>
+</mapper>
